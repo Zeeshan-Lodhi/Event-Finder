@@ -1,0 +1,100 @@
+.clients_comments {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 115vh;
+}
+
+.card-text {
+    padding-bottom: 0px !important;
+    font-size: 14.5px;
+    color: #B6B7BC;
+}
+
+.daniel_card,
+.jonathan_card,
+.kira_card,
+.Jeanette_card,
+.patrick_card {
+    display: flex;
+    justify-content: flex-start;
+    border-radius: 10px;
+    box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+}
+
+.image {
+    border-radius: 32px;
+    width: 65px;
+    height: 70px;
+}
+
+.daniel_card {
+    margin-bottom: 1rem;
+    background-color: #733FC8;
+    width: 157%;
+}
+
+.jonathan_card {
+    margin-bottom: 1.7rem;
+    background-color: #49556B;
+    width: 77%;
+    float: right;
+    margin-right: -6.3rem;
+}
+
+.kira_card {
+    background-color: #FFFFFF;
+    color: black;
+    width: 79%;
+    margin-left: 5rem;
+}
+
+.Jeanette_card {
+    width: 70%;
+    background-color: #FFFFFF;
+    color: black;
+}
+
+.patrick_card {
+    margin-top: 1.5rem;
+    background-color: #18202D;
+    color: white;
+    width: 163%;
+    margin-left: -7.4rem;
+}
+
+@media only screen and (max-width:768px) {
+    .clients_comments {
+        height: 100%;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    .daniel_card {
+        width: 95vw;
+    }
+    .Jeanette_card {
+        width: 95vw;
+    }
+    .jonathan_card {
+        float: none;
+        width: 95vw;
+        margin-right: 0px;
+        margin-top: 1rem;
+    }
+    .patrick_card {
+        margin-top: -0.5rem;
+        width: 95vw;
+        margin-left: 0px;
+    }
+    .kira_card {
+        margin-top: 1rem;
+        width: 95vw;
+        margin-left: 0px;
+    }
+    .columns {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}

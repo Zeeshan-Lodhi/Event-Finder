@@ -1,0 +1,59 @@
+.priceCard{
+    display: flex;
+    height: 78vh;
+    background-color: #f2f2f269;
+    width: 100% !important;
+    box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+.logo{
+    width: 78px;
+}
+.card-body{
+    background-color: #015176;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.allCards{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.card{
+    border-radius: 20px;
+    height: 60vh;
+}
+.card-text{
+    padding-bottom: 3.5rem ;
+}
+#text{
+    color: #f3f2f2f3;
+}
+.buttons{
+   border-radius: 16px;
+    width: 8rem;
+    color: #015176;
+    border: none;
+    padding: 5px; 
+}
+.buttons:hover{
+    background-color: #f3f2f2db;
+    color: #093549;
+}
+
+@media only screen and (max-width:768px)  {
+    .card{
+        width: 78vw;
+        height: 50vh;
+        margin: auto;
+    }
+    .priceCard{
+    justify-content: center;
+    display: flex;
+    height: 154vh;
+    align-items: center;
+    }
+}
