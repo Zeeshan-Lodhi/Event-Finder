@@ -1,4 +1,4 @@
-.priceCard{
+.priceCard {
     display: flex;
     height: 78vh;
     background-color: #f2f2f269;
@@ -7,53 +7,67 @@
     margin-top: 2rem;
     margin-bottom: 1rem;
 }
-.logo{
+
+.logo {
     width: 78px;
 }
-.card-body{
+
+.card-body {
+    /* display: flex;s */
+    flex-direction: column;
+    /* justify-content: space-between; */
+}
+
+#myCardBody {
     background-color: #015176;
     color: white;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
-.allCards{
+
+.allCards {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.card{
+
+#myCard {
     border-radius: 20px;
     height: 60vh;
 }
-.card-text{
-    padding-bottom: 3.5rem ;
+
+.card-text {
+    padding-bottom: 3.5rem;
 }
-#text{
+
+#text {
     color: #f3f2f2f3;
 }
-.buttons{
-   border-radius: 16px;
+
+.buttons {
+    border-radius: 16px;
     width: 8rem;
     color: #015176;
     border: none;
-    padding: 5px; 
+    padding: 5px;
 }
-.buttons:hover{
+
+.buttons:hover {
     background-color: #f3f2f2db;
     color: #093549;
 }
 
-@media only screen and (max-width:768px)  {
-    .card{
+@media only screen and (max-width:768px) {
+    #myCard {
         width: 78vw;
         height: 50vh;
         margin: auto;
     }
-    .priceCard{
-    justify-content: center;
-    display: flex;
-    height: 154vh;
-    align-items: center;
+    .priceCard {
+        justify-content: center;
+        display: flex;
+        height: 154vh;
+        align-items: center;
     }
 }
