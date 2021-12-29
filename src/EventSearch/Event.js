@@ -17,11 +17,12 @@ const Event = () => {
         //block // qh0BJRqIBkAkRtu7HyrKGjmnJ41KvbNo";
         let { data } = await axios.get(url);
         setAlldata(data._embedded.events)
+        // console.log(alldata / 2);
         setloader(false)
     }
 
     const previousBtn = async () => {
-        let url = `https://app.ticketmaster.com/discovery/v2/events.json?page=${page - 1}&apikey=qFxgfAJRGuJBONzQAl9THbSKexBXtGvk`
+        let url = `https://app.ticketmaster.com/discovery/v2/events.json?page=${page - 1}&apikey=zlgpwfAgtQslAeB95WdA8453W9W4oqpp`
         // qh0BJRqIBkAkRtu7HyrKGjmnJ41KvbNo";
         let { data } = await axios.get(url);
         setAlldata(data._embedded.events)
@@ -30,7 +31,7 @@ const Event = () => {
     }
 
     const nextBtn = async () => {
-        let url = `https://app.ticketmaster.com/discovery/v2/events.json?page=${page + 1}&apikey=qh0BJRqIBkAkRtu7HyrKGjmnJ41KvbNo`
+        let url = `https://app.ticketmaster.com/discovery/v2/events.json?page=${page + 1}&apikey=zlgpwfAgtQslAeB95WdA8453W9W4oqpp`
         let { data } = await axios.get(url);
         setAlldata(data._embedded.events)
         setpage(page + 1)
@@ -53,7 +54,8 @@ const Event = () => {
                     ) : (
                         <div className="row">
                             {
-                                alldata.map((elm, ind) => {
+                                alldata.filter((item, ind) => ind < 10).map((elm, ind) => {
+
                                     return (
                                         <div className="col-md-4 col-sm-6 mt-3" key={ind}>
                                             <div className="card" >
