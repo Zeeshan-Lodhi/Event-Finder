@@ -57,7 +57,7 @@ const Event = () => {
                                     return (
                                         <div className="col-md-4 col-sm-6 mt-3" key={ind}>
                                             <div className="card" >
-                                                <img src={elm.images[0].url} alt="..." />
+                                                <img src={elm.images[0].url} alt="..." className=" card-img-top" style={{ height: "15rem" }} />
                                                 <div className="card-body">
                                                     <h5 className="card-title">{elm.name}</h5>
                                                     <p className="card-text"></p>
