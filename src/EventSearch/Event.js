@@ -8,13 +8,14 @@ const Event = () => {
     const [loader, setloader] = useState(true)
     const [countryCode, setCountryCode] = useState("")
     const [postalCode, setpostalCode] = useState("")
+    const [date, setdate] = useState("")
     useEffect(() => {
         fetchData()
         // eslint-disable-next-line
     }, [])
 
     const fetchData = async () => {
-        let url = `https://app.ticketmaster.com/discovery/v2/events.json?page=${page}&countryCode=${countryCode}&postalCode=${postalCode}&apikey=zlgpwfAgtQslAeB95WdA8453W9W4oqpp`
+        let url = `https://app.ticketmaster.com/discovery/v2/events.json?page=${page}&countryCode=${countryCode}&postalCode=${postalCode}&localDate=${date}&apikey=zlgpwfAgtQslAeB95WdA8453W9W4oqpp`
         // block // qFxgfAJRGuJBONzQAl9THbSKexBXtGvk`
         //block // qh0BJRqIBkAkRtu7HyrKGjmnJ41KvbNo";
         let { data } = await axios.get(url);
@@ -23,7 +24,7 @@ const Event = () => {
     }
 
     const previousBtn = async () => {
-        let url = `https://app.ticketmaster.com/discovery/v2/events.json?page=${page - 1}&countryCode=${countryCode}&postalCode=${postalCode}&apikey=zlgpwfAgtQslAeB95WdA8453W9W4oqpp`
+        let url = `https://app.ticketmaster.com/discovery/v2/events.json?page=${page - 1}&countryCode=${countryCode}&postalCode=${postalCode}&localDate=${date}&apikey=zlgpwfAgtQslAeB95WdA8453W9W4oqpp`
         setloader(true)
         let { data } = await axios.get(url);
         setAlldata(data._embedded.events)
@@ -32,22 +33,43 @@ const Event = () => {
     }
 
     const nextBtn = async () => {
-        let url = `https://app.ticketmaster.com/discovery/v2/events.json?page=${page + 1}&countryCode=${countryCode}&postalCode=${postalCode}&apikey=zlgpwfAgtQslAeB95WdA8453W9W4oqpp`
+        let url = `https://app.ticketmaster.com/discovery/v2/events.json?page=${page + 1}&countryCode=${countryCode}&postalCode=${postalCode}&localDate=${date}&apikey=zlgpwfAgtQslAeB95WdA8453W9W4oqpp`
         setloader(true)
         let { data } = await axios.get(url);
         setAlldata(data._embedded.events)
         setpage(page + 1)
         setloader(false)
     }
-    const submitCountryCode = () => {
+    const onChangeEvent = (e) => {
+        if (e.target.value === "Australia" || e.target.value === "australia" || e.target.value === "AU") {
+            setCountryCode("AU")
+        }
+        else if (e.target.value === "Canada" || e.target.value === "canada" || e.target.value === "CA") {
+            setCountryCode("CA")
+        }
+        else if (e.target.value === "Denmark" || e.target.value === "denmark" || e.target.value === "DK") {
+            setCountryCode("DK")
+        }
+        else if (e.target.value === "Germany" || e.target.value === "germany" || e.target.value === "DE") {
+            setCountryCode("DE")
+        }
+    }
+
+    const filterCountryCode = () => {
         setloader(true)
         fetchData()
         setCountryCode("")
     }
-    const submitPostalCode = () => {
+    const filterPostalCode = () => {
         setloader(true)
         fetchData()
         setpostalCode("")
+    }
+
+    const filterDate = () => {
+        setloader(true)
+        fetchData()
+        setdate("")
     }
     return (
         <>
@@ -58,14 +80,19 @@ const Event = () => {
                     <button className="btn btn-success " onClick={nextBtn}>next &rarr;</button>
                 </div>
 
-                <label className='mt-4'>Enter Country Code :
-                    <input type="text" onChange={(e) => { setCountryCode(e.target.value) }} value={countryCode} />
-                    <button className="btn btn-success ml-2" onClick={submitCountryCode}>Filter</button>
+                <label className='mt-4'>Enter CountryCode or CountryName :
+                    <input type="text" onChange={onChangeEvent} />
+                    <button className="btn btn-success ml-2" onClick={filterCountryCode}>Filter</button>
                 </label>
 
                 <label className='mt-4 d-block'>Enter Postal Code :
                     <input type="text" onChange={(e) => { setpostalCode(e.target.value) }} value={postalCode} />
-                    <button className="btn btn-success ml-4" onClick={submitPostalCode}>Filter</button>
+                    <button className="btn btn-success ml-4" onClick={filterPostalCode}>Filter</button>
+                </label>
+
+                <label className='mt-4 d-block'>Enter Date :
+                    <input type="text" onChange={(e) => { setdate(e.target.value) }} value={date} />
+                    <button className="btn btn-success ml-4" onClick={filterDate}>Filter</button>
                 </label>
 
                 {
@@ -97,6 +124,7 @@ const Event = () => {
                         </div>
                     )
                 }
+
             </div>
         </>
     )
