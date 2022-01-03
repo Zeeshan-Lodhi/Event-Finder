@@ -1,14 +1,15 @@
 import axios from 'axios'
 import React, { useEffect } from 'react'
 import { useState } from 'react'
-import Loader from '../Loader/Loader'
+import Loader from './Loader/Loader'
 const Event = () => {
-    const [alldata, setAlldata] = useState([])
+    const [eventsData, setEventsData] = useState([])
     const [page, setpage] = useState(1)
-    const [loader, setloader] = useState(true)
     const [countryCode, setCountryCode] = useState("")
     const [postalCode, setpostalCode] = useState("")
     const [date, setdate] = useState("")
+    const [loader, setloader] = useState(true)
+
     useEffect(() => {
         fetchData()
         // eslint-disable-next-line
@@ -19,7 +20,7 @@ const Event = () => {
         // block // qFxgfAJRGuJBONzQAl9THbSKexBXtGvk`
         //block // qh0BJRqIBkAkRtu7HyrKGjmnJ41KvbNo";
         let { data } = await axios.get(url);
-        setAlldata(data._embedded.events)
+        setEventsData(data._embedded.events)
         setloader(false)
     }
 
@@ -27,7 +28,7 @@ const Event = () => {
         let url = `https://app.ticketmaster.com/discovery/v2/events.json?page=${page - 1}&countryCode=${countryCode}&postalCode=${postalCode}&localDate=${date}&apikey=zlgpwfAgtQslAeB95WdA8453W9W4oqpp`
         setloader(true)
         let { data } = await axios.get(url);
-        setAlldata(data._embedded.events)
+        setEventsData(data._embedded.events)
         setpage(page - 1)
         setloader(false)
     }
@@ -36,7 +37,7 @@ const Event = () => {
         let url = `https://app.ticketmaster.com/discovery/v2/events.json?page=${page + 1}&countryCode=${countryCode}&postalCode=${postalCode}&localDate=${date}&apikey=zlgpwfAgtQslAeB95WdA8453W9W4oqpp`
         setloader(true)
         let { data } = await axios.get(url);
-        setAlldata(data._embedded.events)
+        setEventsData(data._embedded.events)
         setpage(page + 1)
         setloader(false)
     }
@@ -60,6 +61,7 @@ const Event = () => {
         fetchData()
         setCountryCode("")
     }
+
     const filterPostalCode = () => {
         setloader(true)
         fetchData()
@@ -71,6 +73,7 @@ const Event = () => {
         fetchData()
         setdate("")
     }
+
     return (
         <>
             <div className="container">
@@ -103,7 +106,7 @@ const Event = () => {
                     ) : (
                         <div className="row">
                             {
-                                alldata.filter((item, ind) => ind < 10).map((elm, ind) => {
+                                eventsData.filter((item, ind) => ind < 10).map((elm, ind) => {
                                     return (
                                         <div className="col-md-4 col-sm-6 mt-3" key={ind}>
                                             <div className="card" >
