@@ -8,7 +8,8 @@ const Event = () => {
     const [page, setpage] = useState(1)
     const [countryCode, setCountryCode] = useState("")
     const [postalCode, setpostalCode] = useState("")
-    const [date, setdate] = useState("")
+    const [startDate, setstartDate] = useState("")
+    const [endDate, setendDate] = useState("")
     const [loader, setloader] = useState(true)
 
     useEffect(() => {
@@ -17,7 +18,7 @@ const Event = () => {
     }, [])
 
     const fetchData = async () => {
-        let url = `https://app.ticketmaster.com/discovery/v2/events.json?page=${page}&countryCode=${countryCode}&postalCode=${postalCode}&localDate=${date}&apikey=zlgpwfAgtQslAeB95WdA8453W9W4oqpp`
+        let url = `https://app.ticketmaster.com/discovery/v2/events.json?page=${page}&countryCode=${countryCode}&postalCode=${postalCode}&startDateTime=${startDate}&endDateTime=${endDate}&apikey=zlgpwfAgtQslAeB95WdA8453W9W4oqpp`
         // block // qFxgfAJRGuJBONzQAl9THbSKexBXtGvk`
         //block // qh0BJRqIBkAkRtu7HyrKGjmnJ41KvbNo";
         let { data } = await axios.get(url);
@@ -26,7 +27,7 @@ const Event = () => {
     }
 
     const previousBtn = async () => {
-        let url = `https://app.ticketmaster.com/discovery/v2/events.json?page=${page - 1}&countryCode=${countryCode}&postalCode=${postalCode}&localDate=${date}&apikey=zlgpwfAgtQslAeB95WdA8453W9W4oqpp`
+        let url = `https://app.ticketmaster.com/discovery/v2/events.json?page=${page - 1}&countryCode=${countryCode}&postalCode=${postalCode}&startDateTime=${startDate}&endDateTime=${endDate}&apikey=zlgpwfAgtQslAeB95WdA8453W9W4oqpp`
         setloader(true)
         let { data } = await axios.get(url);
         setEventsData(data._embedded.events)
@@ -35,13 +36,14 @@ const Event = () => {
     }
 
     const nextBtn = async () => {
-        let url = `https://app.ticketmaster.com/discovery/v2/events.json?page=${page + 1}&countryCode=${countryCode}&postalCode=${postalCode}&localDate=${date}&apikey=zlgpwfAgtQslAeB95WdA8453W9W4oqpp`
+        let url = `https://app.ticketmaster.com/discovery/v2/events.json?page=${page + 1}&countryCode=${countryCode}&postalCode=${postalCode}&startDateTime=${startDate}&endDateTime=${endDate}&apikey=zlgpwfAgtQslAeB95WdA8453W9W4oqpp`
         setloader(true)
         let { data } = await axios.get(url);
         setEventsData(data._embedded.events)
         setpage(page + 1)
         setloader(false)
     }
+
     const onChangeEvent = (e) => {
         if (e.target.value === "Australia" || e.target.value === "australia" || e.target.value === "AU") {
             setCountryCode("AU")
@@ -69,12 +71,12 @@ const Event = () => {
         setpostalCode("")
     }
 
-    const filterDate = () => {
+    const filterStartEndDate = () => {
         setloader(true)
         fetchData()
-        setdate("")
+        setstartDate("")
+        setendDate("")
     }
-
     return (
         <>
             <div className="container">
@@ -94,10 +96,13 @@ const Event = () => {
                     <button className="btn btn-success ml-4" onClick={filterPostalCode}>Filter</button>
                 </label>
 
-                <label className='mt-4 d-block'>Enter Date :
-                    <input type="text" onChange={(e) => { setdate(e.target.value) }} value={date} />
-                    <button className="btn btn-success ml-4" onClick={filterDate}>Filter</button>
+                <hr />
+                <label className='mt-4 d-block'>Enter StartDate and EndDate :
+                    <input type="text" onChange={(e) => { setstartDate(e.target.value) }} value={startDate} className='mx-2' />
+                    <input type="text" onChange={(e) => { setendDate(e.target.value) }} value={endDate} />
+                    <button className="btn btn-success ml-4" onClick={filterStartEndDate}>Filter</button>
                 </label>
+                <hr />
 
                 {
                     loader === true ? (
@@ -130,6 +135,7 @@ const Event = () => {
                 }
 
             </div>
+
         </>
     )
 }
