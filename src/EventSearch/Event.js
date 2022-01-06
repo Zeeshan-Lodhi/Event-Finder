@@ -23,6 +23,7 @@ const Event = () => {
         //block // qh0BJRqIBkAkRtu7HyrKGjmnJ41KvbNo";
         let { data } = await axios.get(url);
         setEventsData(data._embedded.events)
+        console.log(eventsData);
         setloader(false)
     }
 
@@ -98,8 +99,12 @@ const Event = () => {
 
                 <hr />
                 <label className='mt-4 d-block'>Enter StartDate and EndDate :
-                    <input type="text" onChange={(e) => { setstartDate(e.target.value) }} value={startDate} className='mx-2' />
-                    <input type="text" onChange={(e) => { setendDate(e.target.value) }} value={endDate} />
+                    <input type="date" onChange={(e) => {
+                        setstartDate(e.target.value + "T19:00:00Z")
+                    }} className='mx-2' />
+                    <input type="date" onChange={(e) => {
+                        setendDate(e.target.value + "T19:00:00Z")
+                    }} />
                     <button className="btn btn-success ml-4" onClick={filterStartEndDate}>Filter</button>
                 </label>
                 <hr />
@@ -121,6 +126,8 @@ const Event = () => {
                                                     <h5 className="card-title">{elm.name}</h5>
                                                     <p className="card-text"></p>
                                                     <p> {elm.dates.timezone}</p>
+                                                    <p >StartDate: {elm.sales.public.startDateTime}</p>
+                                                    <p >EndDate: {elm.sales.public.endDateTime}</p>
                                                     <a href={elm.url} rel="noreferrer" target="_blank" className="btn btn-sm btn-primary">
                                                         Get More Info
                                                     </a>
