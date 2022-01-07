@@ -1,49 +1,8 @@
-import axios from 'axios'
-import React, { useEffect } from 'react'
-import { useState } from 'react'
+import React from 'react'
 import Loader from './Loader/Loader'
-const Event = () => {
 
-    const [eventsData, setEventsData] = useState([])
-    const [page, setpage] = useState(1)
-    const [countryCode, setCountryCode] = useState("")
-    const [postalCode, setpostalCode] = useState("")
-    const [startDate, setstartDate] = useState("")
-    const [endDate, setendDate] = useState("")
-    const [loader, setloader] = useState(true)
-
-    useEffect(() => {
-        fetchData()
-        // eslint-disable-next-line
-    }, [])
-
-    const fetchData = async () => {
-        let url = `https://app.ticketmaster.com/discovery/v2/events.json?page=${page}&countryCode=${countryCode}&postalCode=${postalCode}&startDateTime=${startDate}&endDateTime=${endDate}&apikey=zlgpwfAgtQslAeB95WdA8453W9W4oqpp`
-        // block // qFxgfAJRGuJBONzQAl9THbSKexBXtGvk`
-        //block // qh0BJRqIBkAkRtu7HyrKGjmnJ41KvbNo";
-        let { data } = await axios.get(url);
-        setEventsData(data._embedded.events)
-        console.log(eventsData);
-        setloader(false)
-    }
-
-    const previousBtn = async () => {
-        let url = `https://app.ticketmaster.com/discovery/v2/events.json?page=${page - 1}&countryCode=${countryCode}&postalCode=${postalCode}&startDateTime=${startDate}&endDateTime=${endDate}&apikey=zlgpwfAgtQslAeB95WdA8453W9W4oqpp`
-        setloader(true)
-        let { data } = await axios.get(url);
-        setEventsData(data._embedded.events)
-        setpage(page - 1)
-        setloader(false)
-    }
-
-    const nextBtn = async () => {
-        let url = `https://app.ticketmaster.com/discovery/v2/events.json?page=${page + 1}&countryCode=${countryCode}&postalCode=${postalCode}&startDateTime=${startDate}&endDateTime=${endDate}&apikey=zlgpwfAgtQslAeB95WdA8453W9W4oqpp`
-        setloader(true)
-        let { data } = await axios.get(url);
-        setEventsData(data._embedded.events)
-        setpage(page + 1)
-        setloader(false)
-    }
+const Event = ({ loader, setloader, eventsData, setCountryCode, setstartDate, setendDate,
+    setpostalCode, postalCode, page, fetchData, previousBtn, nextBtn }) => {
 
     const onChangeEvent = (e) => {
         if (e.target.value === "Australia" || e.target.value === "australia" || e.target.value === "AU") {

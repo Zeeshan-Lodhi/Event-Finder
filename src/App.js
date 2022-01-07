@@ -2,7 +2,7 @@
 // import PriceCards from "./PriceCards/Cards"
 // import GridSection from './TestomonialGridSection/GridSection'
 // import { Route, Routes } from "react-router-dom"
-import Event from "./EventSearch/Event"
+import ApiCall from "./EventSearch/ApiCall"
 const App = () => {
   return (
     <>
@@ -12,7 +12,7 @@ const App = () => {
         <Route path="/gridsection" element={<GridSection />} />
         <Route path="/events" element={<Event />} />
       </Routes> */}
-      <Event />
+      <ApiCall />
 
     </>
   )
